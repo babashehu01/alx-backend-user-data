@@ -1,52 +1,42 @@
-# # Basic authentication
+# Simple API
 
-This project implements a basic authentication system on a simple API.
+Simple HTTP API for playing with `User` model.
 
-## Requirements
 
-* Python 3.5+
-* Pipenv
+## Files
+
+### `models/`
+
+- `base.py`: base of all models of the API - handle serialization to file
+- `user.py`: user model
+
+### `api/v1`
+
+- `app.py`: entry point of the API
+- `views/index.py`: basic endpoints of the API: `/status` and `/stats`
+- `views/users.py`: all users endpoints
+
 
 ## Setup
 
-1. Clone the repository:
-
-git clone https://github.com/babashehu01/basic-authentication.git
-
-
-2. Install the dependencies:
-
-pipenv install
+```
+$ pip3 install -r requirements.txt
+```
 
 
-3. Set the environment variable `AUTH_TYPE` to `basic`:
+## Run
 
-export AUTH_TYPE=basic
-
-
-## Usage
-
-1. Start the server:
-
-pipenv run python3 app.py
+```
+$ API_HOST=0.0.0.0 API_PORT=5000 python3 -m api.v1.app
+```
 
 
-2. The API is now running on port 5000. You can test it using curl:
+## Routes
 
-curl http://localhost:5000/api/v1/status
-
-This will return the status of the API.
-
-    To access the /api/v1/users endpoint, you need to authenticate first. You can do this by passing the username and password in the Authorization header. For example:
-
-curl -u username:password http://localhost:5000/api/v1/users
-
-If the username and password are valid, you will be able to access the endpoint. Otherwise, you will get an error.
-Documentation
-
-The documentation for the API is available at http://localhost:5000/apidocs/.
-Tests
-
-The tests for the API are located in the tests directory. You can run them using the following command:
-
-pipenv run python3 -m unittest tests.
+- `GET /api/v1/status`: returns the status of the API
+- `GET /api/v1/stats`: returns some stats of the API
+- `GET /api/v1/users`: returns the list of users
+- `GET /api/v1/users/:id`: returns an user based on the ID
+- `DELETE /api/v1/users/:id`: deletes an user based on the ID
+- `POST /api/v1/users`: creates a new user (JSON parameters: `email`, `password`, `last_name` (optional) and `first_name` (optional))
+- `PUT /api/v1/users/:id`: updates an user based on the ID (JSON parameters: `last_name` and `first_name`)
