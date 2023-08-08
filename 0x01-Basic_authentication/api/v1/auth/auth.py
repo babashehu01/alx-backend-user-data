@@ -3,9 +3,18 @@
 """
 from flask import request
 
+
 class Auth:
     """Auth class
     """
+    def __init__(self):
+        """
+            Constructor
+
+            Args:
+                path: path to authenticate
+                excluded_paths: list of excluded path to authenticate
+        """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
